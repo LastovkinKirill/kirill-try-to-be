@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  postgres_db:
+    image: postgres:15
+    container_name: postgres_db
+    volumes:
+      - ~/.pg/pg_data/django:/var/lib/postgresql/data
+    env_file:
+      - .env
+  django_gunicorn:
+#    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: django_gunicorn
+    volumes:
+      - ./static:/app/static
+      - .:/app # if you want to change code not inside container
+    env_file:
+      - .env
+    depends_on:
+      - postgres_db
+    # remove --reload in gunicorn for prod
+    command: >
+      bash -c "python ./manage.py collectstatic --noinput
+      && python ./manage.py migrate
+      && python ./manage.py createsuperuser --noinput || true
+      && gunicorn -b 0.0.0.0:8000 nginx_server.wsgi:application"
+  nginx:
+    build:
+      dockerfile: Dockerfile
+      context: ./docker/nginx/
+    container_name: nginx
+    volumes:
+      - ./static:/app/static
+    ports:
+      - "80:80"
+    depends_on:
+      - django_gunicorn
+

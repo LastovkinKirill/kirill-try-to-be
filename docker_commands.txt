@@ -1,0 +1,68 @@
+docker images
+docker ps
+docker ps -a
+docker run -p 8000:8000 --name dj -d yt_docker
+docker run -p 8000:8000 --name dj yt_docker
+docker build -t yt_docker .
+
+
+docker exec -it dj sh
+
+docker exec -t -i dj /bin/bash
+docker exec -t -i yt_nginx /bin/bash
+
+
+https://www.baeldung.com/ops/docker-container-filesystem
+
+docker export -o hello.tar a0af60c72d93
+
+
+https://phoenixnap.com/kb/exit-docker-container
+
+docker run -it dj /bin/bash
+
+docker run -it yt_nginx /bin/bash
+
+docker system prune -a
+
+
+ufw status
+
+sudo ss -ntpl
+
+
+lsof -i:80
+kill $(lsof -t -i:80)
+
+
+docker network ls
+
+docker compose up -d
+
+docker compose up -build
+
+
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker system prune -a
+
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker system prune -a
+
+
+apt-get update -y
+apt-get install -y iputils-ping
+
+
+docker rm container_id
+docker stop container_id
+
+
+docker exec -ti yt_nginx /bin/bash
+docker run -it yt_nginx /bin/bash
+
+
+ps aux
+ps aux | less
+
+kill -HUP <pid>
