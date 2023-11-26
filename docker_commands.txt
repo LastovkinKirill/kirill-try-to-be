@@ -66,3 +66,7 @@ ps aux
 ps aux | less
 
 kill -HUP <pid>
+
+
+docker-compose pull
+docker-compose up -d --no-build

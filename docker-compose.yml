@@ -10,6 +10,7 @@ services:
       - .env
   django_gunicorn:
 #    restart: always
+    image: django_gunicorn:latest
     build:
       dockerfile: Dockerfile
       context: .
@@ -28,6 +29,7 @@ services:
       && python ./manage.py createsuperuser --noinput || true
       && gunicorn -b 0.0.0.0:8000 nginx_server.wsgi:application"
   nginx:
+    image: nginx:latest
     build:
       dockerfile: Dockerfile
       context: ./docker/nginx/
