@@ -17,6 +17,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+#      # DJANGO CI
 #      - name: Set up Python ${{ matrix.python-version }}
 #        uses: actions/setup-python@v3
 #        with:
@@ -28,13 +30,37 @@ jobs:
 #      - name: Run Tests
 #        run: |
 #          python manage.py test
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+
+
+#      # upload docker image to HUB
+#      - name: Login to Docker Hub
+#        uses: docker/login-action@v3
+#        with:
+#            username: ${{ secrets.DOCKERHUB_USERNAME }}
+#            password: ${{ secrets.DOCKERHUB_TOKEN }}
+#      - name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          push: true
+#          tags: kirilltrytobe/kirill-try-to-be-app:latest
+
+      # DEPLOY on server
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
         with:
-            username: ${{ secrets.DOCKERHUB_USERNAME }}
-            password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: kirilltrytobe/kirill-try-to-be-app:latest
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /root/project_gitgub/kirill-try-to-be/
+            git pull origin main
+            git status
+            docker stop $(docker ps -a -q)
+            docker compose up -d
+            
+            
+#            cd /var/www/youtube.com/
+#            git pull origin main
+#            git status
+#            npm install --only=prod

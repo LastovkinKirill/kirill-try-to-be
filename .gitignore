@@ -3,23 +3,5 @@
 *.py[co]
 __pycache__
 
-#ssh://git@212.113.117.189:/var/www/git/nginx_server_project.git
-#ssh://kirill@185.244.173.249/srv/git/ipsec-back.git
-#ssh://git@212.113.117.189/var/www/git/nginx_server_project.git
-#ssh git@212.113.117.189/var/www/git/nginx_server_project.git
-#
-#
-#git clone git@212.113.117.189/var/www/git/nginx_server_project.git
-#
-#git clone git@gitserver:/srv/git/project.git
-git remote add origin git@212.113.117.189/var/www/git/nginx_server_project.git
 
-git clone git@212.113.117.189/var/www/git/nginx_server_project.git
-git clone git@212.113.117.189:/var/www/git/nginx_server_project.git
-
-
-
-/var/www/git/nginx_server_project.git
-
-
-ssh root@212.113.117.189
+static/

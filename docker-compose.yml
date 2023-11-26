@@ -11,12 +11,13 @@ services:
   django_gunicorn:
 #    restart: always
     image: django_gunicorn:latest
+    pull_policy: never
     build:
       dockerfile: Dockerfile
       context: .
     container_name: django_gunicorn
     volumes:
-      - ./static:/app/static
+      - ./static:/app/static # todo remove it and make it local in container but create outside volume media(files)
       - .:/app # if you want to change code not inside container
     env_file:
       - .env
@@ -30,6 +31,7 @@ services:
       && gunicorn -b 0.0.0.0:8000 nginx_server.wsgi:application"
   nginx:
     image: nginx:latest
+    pull_policy: never
     build:
       dockerfile: Dockerfile
       context: ./docker/nginx/

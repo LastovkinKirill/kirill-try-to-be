@@ -68,5 +68,45 @@ ps aux | less
 kill -HUP <pid>
 
 
-docker-compose pull
-docker-compose up -d --no-build
+docker compose pull
+docker compose up -d --no-build
+
+
+docker run --rm -it --entrypoint bash kirilltrytobe/kirill-try-to-be-app
+
+
+docker exec -ti yt_nginx /bin/bash
+
+https://github.com/compose-spec/compose-spec/blob/master/spec.md#pull_policy
+https://github.com/compose-spec/compose-spec/blob/master/build.md
+
+
+ребилдит только один образ (django_gunicorn)
+docker compose up -d --no-deps --build django_gunicorn
+
+
+docker stop $(docker ps -a -q)
+docker compose up -d
+
+
+
+#ssh://git@212.113.117.189:/var/www/git/nginx_server_project.git
+#ssh://kirill@185.244.173.249/srv/git/ipsec-back.git
+#ssh://git@212.113.117.189/var/www/git/nginx_server_project.git
+#ssh git@212.113.117.189/var/www/git/nginx_server_project.git
+#
+#
+#git clone git@212.113.117.189/var/www/git/nginx_server_project.git
+#
+#git clone git@gitserver:/srv/git/project.git
+git remote add origin git@212.113.117.189/var/www/git/nginx_server_project.git
+
+git clone git@212.113.117.189/var/www/git/nginx_server_project.git
+git clone git@212.113.117.189:/var/www/git/nginx_server_project.git
+
+
+
+/var/www/git/nginx_server_project.git
+
+
+ssh root@212.113.117.189
